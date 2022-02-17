@@ -1,0 +1,10 @@
+syntax = "proto3";
+message testinfo 
+{ 
+    int32 devtype = 1; 
+    int32 devid = 2; 
+    int32 unitid = 3; 
+    int32 chlid = 4; 
+    int32 testid = 5; 
+    bytes stepdata = 6; 
+}

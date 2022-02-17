@@ -1,0 +1,25 @@
+syntax = "proto3";
+package DanmuGameProtocol;
+
+enum RequestCode
+{
+    RequestNone = 0;
+}
+
+enum ActionCode
+{
+    ActionNone = 0;
+}
+
+enum ReturnCode
+{
+    ReturnNone = 0;
+}
+
+
+message MainPack 
+{ 
+    RequestCode requestCode = 1;
+    ActionCode actionCode = 2;
+    ReturnCode returnCode = 3; 
+}

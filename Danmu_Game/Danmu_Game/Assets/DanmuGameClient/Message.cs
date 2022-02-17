@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Google.Protobuf;
 
 namespace Connection
 {
@@ -31,6 +32,11 @@ namespace Connection
             {
                 return buffer.Length - startIndex;
             }
+        }
+
+        public void ReadBuffer(int length)
+        { 
+        
         }
     }
 }
