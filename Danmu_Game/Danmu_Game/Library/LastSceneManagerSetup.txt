@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/SocketDemo/Scenes/SocketDemo.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
