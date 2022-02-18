@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using UnityEngine;
 
 namespace Connection
 {
@@ -17,16 +18,26 @@ namespace Connection
             this.message = new Message();
         }
 
-        private void startReceive()
+        public void startReceive()
         {
             socket.BeginReceive(message.Buffer, message.StartIndex, message.Resize, SocketFlags.None, ReceiveCallBack, null);
         }
         private void ReceiveCallBack(IAsyncResult iar)
         {
-            int length = socket.EndReceive(iar);
-            if (length == 0)
-                return;
-            //string str = Encoding.UTF8.GetString(buffer, 0, length); // ½âÎö
+            try
+            {
+                int length = socket.EndReceive(iar);
+                if (length == 0)
+                    return;
+
+                message.ReadBuffer(length);
+                startReceive();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

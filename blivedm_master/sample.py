@@ -3,7 +3,7 @@ import asyncio
 import random
 
 import blivedm
-from ServerUDP.serverUDP import serverUDP
+from LocalServerSample.serverUDP import serverUDP
 
 # 直播间ID的取值看直播间URL
 TEST_ROOM_IDS = [
@@ -72,7 +72,8 @@ class MyHandler(blivedm.BaseHandler):
 
     async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
         print(f'[{client.room_id}] {message.uname}：{message.msg}')
-        server.send_msg(server.udp_socket,f'[{client.room_id}] {message.uname}：{message.msg}')
+        #server.send_msg(server.udp_socket,f'[{client.room_id}] {message.uname}：{message.msg}')
+        server.send_msg(mainpack)
 
     # async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):
     #     print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'
@@ -83,7 +84,6 @@ class MyHandler(blivedm.BaseHandler):
 
     # async def _on_super_chat(self, client: blivedm.BLiveClient, message: blivedm.SuperChatMessage):
     #     print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
-
 
 server = serverUDP()
 if __name__ == '__main__':

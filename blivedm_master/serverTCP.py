@@ -1,4 +1,20 @@
+from distutils.log import debug
 import socket
+
+# from protobuf import DanmuGameProtocol_pb2 as DGP
+# mainpack = DGP.MainPack()
+# mainpack.value = 10
+# send_msg = mainpack.SerializeToString()
+# print(send_msg)
+
+from protobuf import test_pb2 as DGP
+mainpack = DGP.MainPack()
+mainpack.playerName = "MOYV"
+mainpack.playerPass = "test"
+mainpack.ip = "192.168.1.1"
+mainpack.id = 2
+send_msg =mainpack.SerializeToString()
+print(send_msg)
 
 def main():
     # 创建套接字
@@ -29,7 +45,9 @@ def main():
             # 2.客户端调用了close导致的
             if recv_data:
                 # 回发一些消息给客户端
-                new_client_socket.send("喝汤多是一件美逝".encode("utf-8"))
+                #new_client_socket.send("喝汤多是一件美逝".encode("utf-8"))
+
+                new_client_socket.send(send_msg)
             else:
                 break
 

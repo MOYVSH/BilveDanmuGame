@@ -22,4 +22,5 @@ message MainPack
     RequestCode requestCode = 1;
     ActionCode actionCode = 2;
     ReturnCode returnCode = 3; 
+    int32 value = 4;
 }

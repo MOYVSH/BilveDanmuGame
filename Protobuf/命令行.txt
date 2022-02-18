@@ -1,0 +1,6 @@
+D:\Test\BilveDanmuGame\Protobuf\protoc-3.19.4-win64\bin\protoc.exe --csharp_out=D:\Test\BilveDanmuGame\Danmu_Game\Danmu_Game\Assets\DanmuGameClient\protobuf DanmuGameProtocol.proto
+
+D:\Test\BilveDanmuGame\Protobuf\protoc-3.19.4-win64\bin\protoc.exe --python_out=D:\Test\BilveDanmuGame\blivedm_master\protobuf DanmuGameProtocol.proto
+
+
+protoc --python_out=./ test2.proto
