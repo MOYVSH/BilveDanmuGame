@@ -1,58 +1,54 @@
-from distutils.log import debug
-import socket
+from socket import *
 
-# from protobuf import DanmuGameProtocol_pb2 as DGP
-# mainpack = DGP.MainPack()
-# mainpack.value = 10
-# send_msg = mainpack.SerializeToString()
-# print(send_msg)
-
-from protobuf import test_pb2 as DGP
-mainpack = DGP.MainPack()
-mainpack.playerName = "MOYV"
-mainpack.playerPass = "test"
-mainpack.ip = "192.168.1.1"
-mainpack.id = 2
-send_msg =mainpack.SerializeToString()
-print(send_msg)
-
-def main():
+class serverTCP:
     # 创建套接字
-    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    tcp_socket = None
     # 绑定本地信息
     loc_port = 9787
-    tcp_socket.bind(('localhost',loc_port))
-    # 默认的套接字由主动变为监听
-    tcp_socket.listen(128)
+    #创建客户端socket列表
+    Clients=[]
 
-    # 等待客户端连接
-    # 循环的目的调用多次accept 从而为多个客户端服务
-    while True:
-        # client_socket 为这个客户端服务
-        # client_addr 这个客户端的地址
-        print("等待新客户端的到来...")
-        new_client_socket,client_addr = tcp_socket.accept()
-        print("新客户端的到来%s" % str(client_addr))
+    def send_msg(self, msg: "str"):
+        for clientSocket,clientAddr in self.Clients:
+            clientSocket.send(msg)
 
-        # 循环的目的为一个客户端服务多次
+    def BeginReceive(self):
         while True:
-            # 接受客户端发送过来的请求
-            recv_data = new_client_socket.recv(1024)
-            print("客户端发送过来的请求是%s" % recv_data.decode("utf-8"))
-
-            # 如果recv解堵塞，两种方式：
-            # 1.客户端发送过来数据
-            # 2.客户端调用了close导致的
-            if recv_data:
-                # 回发一些消息给客户端
-                #new_client_socket.send("喝汤多是一件美逝".encode("utf-8"))
-
-                new_client_socket.send(send_msg)
-            else:
+            try:
+                newClient = self.tcp_socket.accept()
+            except Exception as result:#如果没有客户端连接则产生一个异常  
+                pass
+            else:#如果有客户端连接，则将新的客户端设置为非阻塞，并添加到客户端列表中
+                newClient[0].setblocking(0)
+                self.Clients.append(newClient)
+            Clients_invalid=[]#创建无效的客户端列表
+            for clientSocket,clientAddr in self.Clients:
+                try:
+                    # print("尝试连接客户端")
+                    msg = '123'
+                    clientSocket.send(msg.encode('utf-8'))#通过发送数据判断客户端是否在线
+                except:#客户端不在线
+                    # print("客户端不在线")
+                    clientSocket.close()
+                    Clients_invalid.append((clientSocket,clientAddr))#将客户端计入无效列表
+                else:
+                    # print("客户端连接成功")
+                    try:
+                        recvData = clientSocket.recv(1024)
+                        if len(recvData) > 0:
+                            print(recvData)
+                        else:
+                            pass
+                    except:#接收异常则忽略
+                        pass
+            for client in Clients_invalid:
+                self.Clients.remove(client)
+            if len(self.Clients) > 0 :
                 break
 
-        # 关闭套接字
-        new_client_socket.close()
-    tcp_socket.close()
-if __name__ =="__main__":
-    main()
+
+    def __init__(self):
+        self.tcp_socket = socket(AF_INET, SOCK_STREAM)# 创建套接字
+        self.tcp_socket.bind(('localhost',self.loc_port))# 绑定端口
+        self.tcp_socket.listen(128)# 默认的套接字由主动变为监听
+        self.tcp_socket.setblocking(0)

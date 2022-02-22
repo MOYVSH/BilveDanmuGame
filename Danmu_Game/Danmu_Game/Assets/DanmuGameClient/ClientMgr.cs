@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClientMgr : MonoBehaviour
 {
+    public Button Button_Ping;
     private GaemClient client;
     private Socket socket;
     // Start is called before the first frame update
@@ -17,11 +19,14 @@ public class ClientMgr : MonoBehaviour
         client = new GaemClient(socket);
         socket.Send(Encoding.UTF8.GetBytes("连接成功！"));
         client.startReceive();
+        Button_Ping.onClick.AddListener(onclick);
     }
-
-    // Update is called once per frame
-    void Update()
+    void onclick()
     {
-        
+        socket.Send(Encoding.UTF8.GetBytes("连接成功！"));
+    }
+    private void OnDestroy()
+    {
+        socket.Close();
     }
 }

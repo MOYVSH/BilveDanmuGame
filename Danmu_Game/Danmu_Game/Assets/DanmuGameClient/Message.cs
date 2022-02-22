@@ -44,7 +44,8 @@ namespace Connection
         public void ReadBuffer(int length)
         {
             MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 0, length);
-            Debug.LogError(pack.Ip);
+            Debug.LogError(pack.UserName);
+            Debug.LogError(pack.UserText);
             //startIndex += length;
             //if (startIndex <= 4) return;
             ////count为包体长度

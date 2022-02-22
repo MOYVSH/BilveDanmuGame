@@ -3,8 +3,8 @@ package test;
 
 message MainPack 
 { 
-    string playerName = 1;
-	string playerPass = 2;
+    string UserName = 1;
+	string UserText = 2;
 	string ip = 3;
 	int32 id = 4;
 }

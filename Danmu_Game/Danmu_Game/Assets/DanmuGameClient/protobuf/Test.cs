@@ -24,13 +24,13 @@ namespace Test {
     static TestReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cgp0ZXN0LnByb3RvEgR0ZXN0IkoKCE1haW5QYWNrEhIKCnBsYXllck5hbWUY",
-            "ASABKAkSEgoKcGxheWVyUGFzcxgCIAEoCRIKCgJpcBgDIAEoCRIKCgJpZBgE",
-            "IAEoBWIGcHJvdG8z"));
+            "Cgp0ZXN0LnByb3RvEgR0ZXN0IkYKCE1haW5QYWNrEhAKCFVzZXJOYW1lGAEg",
+            "ASgJEhAKCFVzZXJUZXh0GAIgASgJEgoKAmlwGAMgASgJEgoKAmlkGAQgASgF",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Test.MainPack), global::Test.MainPack.Parser, new[]{ "PlayerName", "PlayerPass", "Ip", "Id" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Test.MainPack), global::Test.MainPack.Parser, new[]{ "UserName", "UserText", "Ip", "Id" }, null, null, null, null)
           }));
     }
     #endregion
@@ -71,8 +71,8 @@ namespace Test {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MainPack(MainPack other) : this() {
-      playerName_ = other.playerName_;
-      playerPass_ = other.playerPass_;
+      userName_ = other.userName_;
+      userText_ = other.userText_;
       ip_ = other.ip_;
       id_ = other.id_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -84,27 +84,27 @@ namespace Test {
       return new MainPack(this);
     }
 
-    /// <summary>Field number for the "playerName" field.</summary>
-    public const int PlayerNameFieldNumber = 1;
-    private string playerName_ = "";
+    /// <summary>Field number for the "UserName" field.</summary>
+    public const int UserNameFieldNumber = 1;
+    private string userName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string PlayerName {
-      get { return playerName_; }
+    public string UserName {
+      get { return userName_; }
       set {
-        playerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        userName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "playerPass" field.</summary>
-    public const int PlayerPassFieldNumber = 2;
-    private string playerPass_ = "";
+    /// <summary>Field number for the "UserText" field.</summary>
+    public const int UserTextFieldNumber = 2;
+    private string userText_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string PlayerPass {
-      get { return playerPass_; }
+    public string UserText {
+      get { return userText_; }
       set {
-        playerPass_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        userText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -147,8 +147,8 @@ namespace Test {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (PlayerName != other.PlayerName) return false;
-      if (PlayerPass != other.PlayerPass) return false;
+      if (UserName != other.UserName) return false;
+      if (UserText != other.UserText) return false;
       if (Ip != other.Ip) return false;
       if (Id != other.Id) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -158,8 +158,8 @@ namespace Test {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (PlayerName.Length != 0) hash ^= PlayerName.GetHashCode();
-      if (PlayerPass.Length != 0) hash ^= PlayerPass.GetHashCode();
+      if (UserName.Length != 0) hash ^= UserName.GetHashCode();
+      if (UserText.Length != 0) hash ^= UserText.GetHashCode();
       if (Ip.Length != 0) hash ^= Ip.GetHashCode();
       if (Id != 0) hash ^= Id.GetHashCode();
       if (_unknownFields != null) {
@@ -180,13 +180,13 @@ namespace Test {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (PlayerName.Length != 0) {
+      if (UserName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(PlayerName);
+        output.WriteString(UserName);
       }
-      if (PlayerPass.Length != 0) {
+      if (UserText.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(PlayerPass);
+        output.WriteString(UserText);
       }
       if (Ip.Length != 0) {
         output.WriteRawTag(26);
@@ -206,13 +206,13 @@ namespace Test {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (PlayerName.Length != 0) {
+      if (UserName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(PlayerName);
+        output.WriteString(UserName);
       }
-      if (PlayerPass.Length != 0) {
+      if (UserText.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(PlayerPass);
+        output.WriteString(UserText);
       }
       if (Ip.Length != 0) {
         output.WriteRawTag(26);
@@ -232,11 +232,11 @@ namespace Test {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (PlayerName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerName);
+      if (UserName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
       }
-      if (PlayerPass.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerPass);
+      if (UserText.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserText);
       }
       if (Ip.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Ip);
@@ -256,11 +256,11 @@ namespace Test {
       if (other == null) {
         return;
       }
-      if (other.PlayerName.Length != 0) {
-        PlayerName = other.PlayerName;
+      if (other.UserName.Length != 0) {
+        UserName = other.UserName;
       }
-      if (other.PlayerPass.Length != 0) {
-        PlayerPass = other.PlayerPass;
+      if (other.UserText.Length != 0) {
+        UserText = other.UserText;
       }
       if (other.Ip.Length != 0) {
         Ip = other.Ip;
@@ -284,11 +284,11 @@ namespace Test {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            PlayerName = input.ReadString();
+            UserName = input.ReadString();
             break;
           }
           case 18: {
-            PlayerPass = input.ReadString();
+            UserText = input.ReadString();
             break;
           }
           case 26: {
@@ -315,11 +315,11 @@ namespace Test {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            PlayerName = input.ReadString();
+            UserName = input.ReadString();
             break;
           }
           case 18: {
-            PlayerPass = input.ReadString();
+            UserText = input.ReadString();
             break;
           }
           case 26: {

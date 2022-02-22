@@ -29,13 +29,13 @@ namespace Connection
                 int length = socket.EndReceive(iar);
                 if (length == 0)
                     return;
-
+                
                 message.ReadBuffer(length);
                 startReceive();
             }
             catch (Exception)
             {
-
+                startReceive();
                 throw;
             }
         }
