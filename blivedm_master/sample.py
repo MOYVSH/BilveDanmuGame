@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import asyncio
+from distutils.log import debug
 import random
 
 import blivedm
@@ -10,7 +11,8 @@ from protobuf import test_pb2 as DGP
 
 # 直播间ID的取值看直播间URL
 TEST_ROOM_IDS = [
-    419850,
+    #419850,
+    22909669,
 ]
 
 
@@ -75,13 +77,15 @@ class MyHandler(blivedm.BaseHandler):
 
 
     async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
+        print(f'[{client.room_id}] 用户：{message.uname} 留言：{message.msg}')
         mainpack = DGP.MainPack()
         mainpack.UserName = message.uname
         mainpack.UserText = message.msg
         mainpack.ip = "192.168.1.1"
         mainpack.id = message.uid
         msg = mainpack.SerializeToString()
-        print(f'[{client.room_id}] 用户：{message.uname} 留言：{message.msg}')
+        head = (len(msg)).to_bytes(4, byteorder='little')
+        server.send_msg(head)
         server.send_msg(msg)
 
     async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):

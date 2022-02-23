@@ -16,14 +16,10 @@ public class ClientMgr : MonoBehaviour
     {
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         socket.Connect("localhost", 9787);//连接到服务端
+        socket.NoDelay = true;
         client = new GaemClient(socket);
         socket.Send(Encoding.UTF8.GetBytes("连接成功！"));
         client.startReceive();
-        Button_Ping.onClick.AddListener(onclick);
-    }
-    void onclick()
-    {
-        socket.Send(Encoding.UTF8.GetBytes("连接成功！"));
     }
     private void OnDestroy()
     {

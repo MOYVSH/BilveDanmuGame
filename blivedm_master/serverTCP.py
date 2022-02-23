@@ -25,7 +25,7 @@ class serverTCP:
             for clientSocket,clientAddr in self.Clients:
                 try:
                     # print("尝试连接客户端")
-                    msg = '123'
+                    msg = '0'
                     clientSocket.send(msg.encode('utf-8'))#通过发送数据判断客户端是否在线
                 except:#客户端不在线
                     # print("客户端不在线")

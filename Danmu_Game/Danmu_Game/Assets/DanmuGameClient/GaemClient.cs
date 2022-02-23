@@ -26,6 +26,12 @@ namespace Connection
         {
             try
             {
+                if (socket == null && socket.Connected == false)
+                {
+                    Debug.LogError("未创建socket或socket未连接");
+                    return;
+                }
+
                 int length = socket.EndReceive(iar);
                 if (length == 0)
                     return;
