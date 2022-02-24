@@ -1,4 +1,5 @@
 from socket import *
+import time
 
 class serverTCP:
     # 创建套接字
@@ -11,6 +12,7 @@ class serverTCP:
     def send_msg(self, msg: "str"):
         for clientSocket,clientAddr in self.Clients:
             clientSocket.send(msg)
+            time.sleep(0.2)
 
     def BeginReceive(self):
         while True:
@@ -49,6 +51,6 @@ class serverTCP:
 
     def __init__(self):
         self.tcp_socket = socket(AF_INET, SOCK_STREAM)# 创建套接字
-        self.tcp_socket.bind(('localhost',self.loc_port))# 绑定端口
+        self.tcp_socket.bind(('127.0.0.1',self.loc_port))# 绑定端口
         self.tcp_socket.listen(128)# 默认的套接字由主动变为监听
         self.tcp_socket.setblocking(0)

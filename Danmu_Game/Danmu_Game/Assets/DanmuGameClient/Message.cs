@@ -10,6 +10,7 @@ namespace Connection
 {
     public class Message
     {
+        public List<MainPack> msgList = new List<MainPack>();
         private byte[] buffer = new byte[1024];
         private int startIndex; //当前存储了多少数据
 
@@ -55,8 +56,7 @@ namespace Connection
                     MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 4, length);
                     Array.Copy(buffer, count + 4, buffer, 0, startIndex - count - 4);
                     startIndex -= count + 4;
-                    Debug.LogError(pack.UserName);
-                    Debug.LogError(pack.UserText);
+                    msgList.Add(pack);
                 }
                 else
                 {

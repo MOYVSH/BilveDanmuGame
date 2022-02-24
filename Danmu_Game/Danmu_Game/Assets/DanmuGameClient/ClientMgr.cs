@@ -1,10 +1,12 @@
 using Connection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Test;
 
 public class ClientMgr : MonoBehaviour
 {
@@ -14,13 +16,29 @@ public class ClientMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        socket.Connect("localhost", 9787);//连接到服务端
-        socket.NoDelay = true;
-        client = new GaemClient(socket);
-        socket.Send(Encoding.UTF8.GetBytes("连接成功！"));
-        client.startReceive();
+        Button_Ping.onClick.AddListener(StartClient);
     }
+    private void StartClient()
+    {
+        if (socket == null)
+        {
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            socket.NoDelay = true;
+            client = new GaemClient(socket);
+            client.SrartConnect();
+        }
+    }
+    private void Update()
+    {
+        if (client == null) return;
+        if (client.message.msgList.Count <= 0) return;
+        
+        MainPack pack = client.message.msgList[0];
+        client.message.msgList.RemoveAt(0);
+
+        Debug.Log(pack.UserName + ":" + pack.UserText);
+    }
+
     private void OnDestroy()
     {
         socket.Close();

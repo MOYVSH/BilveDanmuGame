@@ -9,41 +9,80 @@ namespace Connection
 {
     public class GaemClient
     {
+        public Message message;
         private Socket socket;
-        private Message message;
 
         public GaemClient(Socket socket)
         {
             this.socket = socket;
             this.message = new Message();
         }
-
-        public void startReceive()
+        #region Connect
+        /// <summary>
+        /// 连接到服务端
+        /// </summary>
+        public void SrartConnect()
         {
-            socket.BeginReceive(message.Buffer, message.StartIndex, message.Resize, SocketFlags.None, ReceiveCallBack, null);
+            socket.BeginConnect("127.0.0.1", 9787, ConnectCallBack, socket);
         }
-        private void ReceiveCallBack(IAsyncResult iar)
+        public void ConnectCallBack(IAsyncResult iar)
         {
             try
             {
-                if (socket == null && socket.Connected == false)
-                {
-                    Debug.LogError("未创建socket或socket未连接");
-                    return;
-                }
-
-                int length = socket.EndReceive(iar);
-                if (length == 0)
-                    return;
-                
-                message.ReadBuffer(length);
-                startReceive();
+                Socket socket = (Socket)iar.AsyncState;
+                socket.EndConnect(iar);
+                StartReceive();
             }
-            catch (Exception)
+            catch (SocketException ex)
             {
-                startReceive();
-                throw;
+                Debug.LogError("Connect fail:" + ex.ToString());
             }
         }
+        #endregion
+
+        #region Receive
+        /// <summary>
+        /// 开始接收消息
+        /// </summary>
+        public void StartReceive()
+        {
+            socket.BeginReceive(message.Buffer, message.StartIndex, message.Resize, SocketFlags.None, ReceiveCallBack, socket);
+        }
+        public void ReceiveCallBack(IAsyncResult iar)
+        {
+            try
+            {
+                Socket socket = (Socket)iar.AsyncState;
+                int Length = socket.EndReceive(iar);
+                message.ReadBuffer(Length);
+                StartReceive();
+            }
+            catch (SocketException ex)
+            {
+                Debug.LogError("Connect fail:" + ex.ToString());
+            }
+        }
+        #endregion
+
+        #region Send
+        public void Send(string str)
+        {
+            byte[] sendByte = Encoding.UTF8.GetBytes(str);
+            socket.BeginSend(sendByte, 0, sendByte.Length, 0, SendCallBack, socket);
+        }
+        private void SendCallBack(IAsyncResult iar)
+        {
+            try
+            {
+                Socket socket = (Socket)iar.AsyncState;
+                int count = socket.EndSend(iar);
+                Debug.LogError("Send Successful:" + count);
+            }
+            catch (SocketException ex)
+            {
+                Debug.LogError("Send fail:"+ex.ToString());
+            }
+        }
+        #endregion
     }
 }
