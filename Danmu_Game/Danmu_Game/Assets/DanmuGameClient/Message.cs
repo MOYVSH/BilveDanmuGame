@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Google.Protobuf;
 using System;
-//using DanmuGameProtocol;
-using Test;
+using DanmuGameProtocol;
 
 namespace Connection
 {

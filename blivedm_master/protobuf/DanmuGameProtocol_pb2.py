@@ -15,17 +15,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x44\x61nmuGameProtocol.proto\x12\x11\x44\x61nmuGameProtocol\"\xb4\x01\n\x08MainPack\x12\x33\n\x0brequestCode\x18\x01 \x01(\x0e\x32\x1e.DanmuGameProtocol.RequestCode\x12\x31\n\nactionCode\x18\x02 \x01(\x0e\x32\x1d.DanmuGameProtocol.ActionCode\x12\x31\n\nreturnCode\x18\x03 \x01(\x0e\x32\x1d.DanmuGameProtocol.ReturnCode\x12\r\n\x05value\x18\x04 \x01(\x05*\x1e\n\x0bRequestCode\x12\x0f\n\x0bRequestNone\x10\x00*\x1c\n\nActionCode\x12\x0e\n\nActionNone\x10\x00*\x1c\n\nReturnCode\x12\x0e\n\nReturnNone\x10\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x44\x61nmuGameProtocol.proto\x12\x11\x44\x61nmuGameProtocol\"S\n\x08MainPack\x12\x13\n\x0bMessageType\x18\x01 \x01(\r\x12\x0e\n\x06UserID\x18\x02 \x01(\x05\x12\x10\n\x08UserName\x18\x03 \x01(\t\x12\x10\n\x08UserText\x18\x04 \x01(\t*>\n\x0bMessageType\x12\x0b\n\x07\x64\x61nmaku\x10\x00\x12\x08\n\x04gift\x10\x01\x12\t\n\x05guard\x10\x02\x12\r\n\tsuperchat\x10\x03\x62\x06proto3')
 
-_REQUESTCODE = DESCRIPTOR.enum_types_by_name['RequestCode']
-RequestCode = enum_type_wrapper.EnumTypeWrapper(_REQUESTCODE)
-_ACTIONCODE = DESCRIPTOR.enum_types_by_name['ActionCode']
-ActionCode = enum_type_wrapper.EnumTypeWrapper(_ACTIONCODE)
-_RETURNCODE = DESCRIPTOR.enum_types_by_name['ReturnCode']
-ReturnCode = enum_type_wrapper.EnumTypeWrapper(_RETURNCODE)
-RequestNone = 0
-ActionNone = 0
-ReturnNone = 0
+_MESSAGETYPE = DESCRIPTOR.enum_types_by_name['MessageType']
+MessageType = enum_type_wrapper.EnumTypeWrapper(_MESSAGETYPE)
+danmaku = 0
+gift = 1
+guard = 2
+superchat = 3
 
 
 _MAINPACK = DESCRIPTOR.message_types_by_name['MainPack']
@@ -39,12 +36,8 @@ _sym_db.RegisterMessage(MainPack)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _REQUESTCODE._serialized_start=229
-  _REQUESTCODE._serialized_end=259
-  _ACTIONCODE._serialized_start=261
-  _ACTIONCODE._serialized_end=289
-  _RETURNCODE._serialized_start=291
-  _RETURNCODE._serialized_end=319
-  _MAINPACK._serialized_start=47
-  _MAINPACK._serialized_end=227
+  _MESSAGETYPE._serialized_start=131
+  _MESSAGETYPE._serialized_end=193
+  _MAINPACK._serialized_start=46
+  _MAINPACK._serialized_end=129
 # @@protoc_insertion_point(module_scope)

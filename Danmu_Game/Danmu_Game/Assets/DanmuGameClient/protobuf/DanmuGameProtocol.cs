@@ -25,33 +25,25 @@ namespace DanmuGameProtocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdEYW5tdUdhbWVQcm90b2NvbC5wcm90bxIRRGFubXVHYW1lUHJvdG9jb2wi",
-            "tAEKCE1haW5QYWNrEjMKC3JlcXVlc3RDb2RlGAEgASgOMh4uRGFubXVHYW1l",
-            "UHJvdG9jb2wuUmVxdWVzdENvZGUSMQoKYWN0aW9uQ29kZRgCIAEoDjIdLkRh",
-            "bm11R2FtZVByb3RvY29sLkFjdGlvbkNvZGUSMQoKcmV0dXJuQ29kZRgDIAEo",
-            "DjIdLkRhbm11R2FtZVByb3RvY29sLlJldHVybkNvZGUSDQoFdmFsdWUYBCAB",
-            "KAUqHgoLUmVxdWVzdENvZGUSDwoLUmVxdWVzdE5vbmUQACocCgpBY3Rpb25D",
-            "b2RlEg4KCkFjdGlvbk5vbmUQACocCgpSZXR1cm5Db2RlEg4KClJldHVybk5v",
-            "bmUQAGIGcHJvdG8z"));
+            "UwoITWFpblBhY2sSEwoLTWVzc2FnZVR5cGUYASABKA0SDgoGVXNlcklEGAIg",
+            "ASgFEhAKCFVzZXJOYW1lGAMgASgJEhAKCFVzZXJUZXh0GAQgASgJKj4KC01l",
+            "c3NhZ2VUeXBlEgsKB2Rhbm1ha3UQABIICgRnaWZ0EAESCQoFZ3VhcmQQAhIN",
+            "CglzdXBlcmNoYXQQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::DanmuGameProtocol.RequestCode), typeof(global::DanmuGameProtocol.ActionCode), typeof(global::DanmuGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::DanmuGameProtocol.MainPack), global::DanmuGameProtocol.MainPack.Parser, new[]{ "RequestCode", "ActionCode", "ReturnCode", "Value" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::DanmuGameProtocol.MessageType), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::DanmuGameProtocol.MainPack), global::DanmuGameProtocol.MainPack.Parser, new[]{ "MessageType", "UserID", "UserName", "UserText" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Enums
-  public enum RequestCode {
-    [pbr::OriginalName("RequestNone")] RequestNone = 0,
-  }
-
-  public enum ActionCode {
-    [pbr::OriginalName("ActionNone")] ActionNone = 0,
-  }
-
-  public enum ReturnCode {
-    [pbr::OriginalName("ReturnNone")] ReturnNone = 0,
+  public enum MessageType {
+    [pbr::OriginalName("danmaku")] Danmaku = 0,
+    [pbr::OriginalName("gift")] Gift = 1,
+    [pbr::OriginalName("guard")] Guard = 2,
+    [pbr::OriginalName("superchat")] Superchat = 3,
   }
 
   #endregion
@@ -91,10 +83,10 @@ namespace DanmuGameProtocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MainPack(MainPack other) : this() {
-      requestCode_ = other.requestCode_;
-      actionCode_ = other.actionCode_;
-      returnCode_ = other.returnCode_;
-      value_ = other.value_;
+      messageType_ = other.messageType_;
+      userID_ = other.userID_;
+      userName_ = other.userName_;
+      userText_ = other.userText_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -104,51 +96,51 @@ namespace DanmuGameProtocol {
       return new MainPack(this);
     }
 
-    /// <summary>Field number for the "requestCode" field.</summary>
-    public const int RequestCodeFieldNumber = 1;
-    private global::DanmuGameProtocol.RequestCode requestCode_ = global::DanmuGameProtocol.RequestCode.RequestNone;
+    /// <summary>Field number for the "MessageType" field.</summary>
+    public const int MessageTypeFieldNumber = 1;
+    private uint messageType_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::DanmuGameProtocol.RequestCode RequestCode {
-      get { return requestCode_; }
+    public uint MessageType {
+      get { return messageType_; }
       set {
-        requestCode_ = value;
+        messageType_ = value;
       }
     }
 
-    /// <summary>Field number for the "actionCode" field.</summary>
-    public const int ActionCodeFieldNumber = 2;
-    private global::DanmuGameProtocol.ActionCode actionCode_ = global::DanmuGameProtocol.ActionCode.ActionNone;
+    /// <summary>Field number for the "UserID" field.</summary>
+    public const int UserIDFieldNumber = 2;
+    private int userID_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::DanmuGameProtocol.ActionCode ActionCode {
-      get { return actionCode_; }
+    public int UserID {
+      get { return userID_; }
       set {
-        actionCode_ = value;
+        userID_ = value;
       }
     }
 
-    /// <summary>Field number for the "returnCode" field.</summary>
-    public const int ReturnCodeFieldNumber = 3;
-    private global::DanmuGameProtocol.ReturnCode returnCode_ = global::DanmuGameProtocol.ReturnCode.ReturnNone;
+    /// <summary>Field number for the "UserName" field.</summary>
+    public const int UserNameFieldNumber = 3;
+    private string userName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::DanmuGameProtocol.ReturnCode ReturnCode {
-      get { return returnCode_; }
+    public string UserName {
+      get { return userName_; }
       set {
-        returnCode_ = value;
+        userName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "value" field.</summary>
-    public const int ValueFieldNumber = 4;
-    private int value_;
+    /// <summary>Field number for the "UserText" field.</summary>
+    public const int UserTextFieldNumber = 4;
+    private string userText_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Value {
-      get { return value_; }
+    public string UserText {
+      get { return userText_; }
       set {
-        value_ = value;
+        userText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -167,10 +159,10 @@ namespace DanmuGameProtocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RequestCode != other.RequestCode) return false;
-      if (ActionCode != other.ActionCode) return false;
-      if (ReturnCode != other.ReturnCode) return false;
-      if (Value != other.Value) return false;
+      if (MessageType != other.MessageType) return false;
+      if (UserID != other.UserID) return false;
+      if (UserName != other.UserName) return false;
+      if (UserText != other.UserText) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -178,10 +170,10 @@ namespace DanmuGameProtocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RequestCode != global::DanmuGameProtocol.RequestCode.RequestNone) hash ^= RequestCode.GetHashCode();
-      if (ActionCode != global::DanmuGameProtocol.ActionCode.ActionNone) hash ^= ActionCode.GetHashCode();
-      if (ReturnCode != global::DanmuGameProtocol.ReturnCode.ReturnNone) hash ^= ReturnCode.GetHashCode();
-      if (Value != 0) hash ^= Value.GetHashCode();
+      if (MessageType != 0) hash ^= MessageType.GetHashCode();
+      if (UserID != 0) hash ^= UserID.GetHashCode();
+      if (UserName.Length != 0) hash ^= UserName.GetHashCode();
+      if (UserText.Length != 0) hash ^= UserText.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -200,21 +192,21 @@ namespace DanmuGameProtocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RequestCode != global::DanmuGameProtocol.RequestCode.RequestNone) {
+      if (MessageType != 0) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) RequestCode);
+        output.WriteUInt32(MessageType);
       }
-      if (ActionCode != global::DanmuGameProtocol.ActionCode.ActionNone) {
+      if (UserID != 0) {
         output.WriteRawTag(16);
-        output.WriteEnum((int) ActionCode);
+        output.WriteInt32(UserID);
       }
-      if (ReturnCode != global::DanmuGameProtocol.ReturnCode.ReturnNone) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) ReturnCode);
+      if (UserName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(UserName);
       }
-      if (Value != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(Value);
+      if (UserText.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(UserText);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -226,21 +218,21 @@ namespace DanmuGameProtocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RequestCode != global::DanmuGameProtocol.RequestCode.RequestNone) {
+      if (MessageType != 0) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) RequestCode);
+        output.WriteUInt32(MessageType);
       }
-      if (ActionCode != global::DanmuGameProtocol.ActionCode.ActionNone) {
+      if (UserID != 0) {
         output.WriteRawTag(16);
-        output.WriteEnum((int) ActionCode);
+        output.WriteInt32(UserID);
       }
-      if (ReturnCode != global::DanmuGameProtocol.ReturnCode.ReturnNone) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) ReturnCode);
+      if (UserName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(UserName);
       }
-      if (Value != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(Value);
+      if (UserText.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(UserText);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -252,17 +244,17 @@ namespace DanmuGameProtocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RequestCode != global::DanmuGameProtocol.RequestCode.RequestNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) RequestCode);
+      if (MessageType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MessageType);
       }
-      if (ActionCode != global::DanmuGameProtocol.ActionCode.ActionNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ActionCode);
+      if (UserID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserID);
       }
-      if (ReturnCode != global::DanmuGameProtocol.ReturnCode.ReturnNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ReturnCode);
+      if (UserName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
       }
-      if (Value != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Value);
+      if (UserText.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserText);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -276,17 +268,17 @@ namespace DanmuGameProtocol {
       if (other == null) {
         return;
       }
-      if (other.RequestCode != global::DanmuGameProtocol.RequestCode.RequestNone) {
-        RequestCode = other.RequestCode;
+      if (other.MessageType != 0) {
+        MessageType = other.MessageType;
       }
-      if (other.ActionCode != global::DanmuGameProtocol.ActionCode.ActionNone) {
-        ActionCode = other.ActionCode;
+      if (other.UserID != 0) {
+        UserID = other.UserID;
       }
-      if (other.ReturnCode != global::DanmuGameProtocol.ReturnCode.ReturnNone) {
-        ReturnCode = other.ReturnCode;
+      if (other.UserName.Length != 0) {
+        UserName = other.UserName;
       }
-      if (other.Value != 0) {
-        Value = other.Value;
+      if (other.UserText.Length != 0) {
+        UserText = other.UserText;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -304,19 +296,19 @@ namespace DanmuGameProtocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            RequestCode = (global::DanmuGameProtocol.RequestCode) input.ReadEnum();
+            MessageType = input.ReadUInt32();
             break;
           }
           case 16: {
-            ActionCode = (global::DanmuGameProtocol.ActionCode) input.ReadEnum();
+            UserID = input.ReadInt32();
             break;
           }
-          case 24: {
-            ReturnCode = (global::DanmuGameProtocol.ReturnCode) input.ReadEnum();
+          case 26: {
+            UserName = input.ReadString();
             break;
           }
-          case 32: {
-            Value = input.ReadInt32();
+          case 34: {
+            UserText = input.ReadString();
             break;
           }
         }
@@ -335,19 +327,19 @@ namespace DanmuGameProtocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            RequestCode = (global::DanmuGameProtocol.RequestCode) input.ReadEnum();
+            MessageType = input.ReadUInt32();
             break;
           }
           case 16: {
-            ActionCode = (global::DanmuGameProtocol.ActionCode) input.ReadEnum();
+            UserID = input.ReadInt32();
             break;
           }
-          case 24: {
-            ReturnCode = (global::DanmuGameProtocol.ReturnCode) input.ReadEnum();
+          case 26: {
+            UserName = input.ReadString();
             break;
           }
-          case 32: {
-            Value = input.ReadInt32();
+          case 34: {
+            UserText = input.ReadString();
             break;
           }
         }

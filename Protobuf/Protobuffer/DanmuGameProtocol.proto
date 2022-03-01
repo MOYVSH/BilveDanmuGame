@@ -1,26 +1,18 @@
 syntax = "proto3";
 package DanmuGameProtocol;
 
-enum RequestCode
+enum MessageType
 {
-    RequestNone = 0;
+    danmaku = 0;
+    gift = 1;
+    guard = 2;
+    superchat = 3;
 }
-
-enum ActionCode
-{
-    ActionNone = 0;
-}
-
-enum ReturnCode
-{
-    ReturnNone = 0;
-}
-
 
 message MainPack 
 { 
-    RequestCode requestCode = 1;
-    ActionCode actionCode = 2;
-    ReturnCode returnCode = 3; 
-    int32 value = 4;
+    uint32 MessageType = 1;  
+    int32 UserID = 2;
+    string UserName = 3;
+	string UserText = 4;
 }

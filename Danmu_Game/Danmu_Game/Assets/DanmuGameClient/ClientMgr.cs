@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-using Test;
+using DanmuGameProtocol;
 
 public class ClientMgr : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class ClientMgr : MonoBehaviour
         MainPack pack = client.message.msgList[0];
         client.message.msgList.RemoveAt(0);
 
-        Debug.Log(pack.UserName + ":" + pack.UserText);
+        Debug.Log((MessageType)pack.MessageType + ":" + pack.UserName + ":" + pack.UserText);
     }
 
     private void OnDestroy()

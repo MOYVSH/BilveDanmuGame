@@ -2,16 +2,16 @@
 import asyncio
 from distutils.log import debug
 import random
-
+import enum
 import blivedm
 from serverTCP import *
 
-from protobuf import test_pb2 as DGP
+from protobuf import DanmuGameProtocol_pb2 as DGP
 
 # 直播间ID的取值看直播间URL
 TEST_ROOM_IDS = [
-    #419850,#自己的
-    3044248,#zc
+    419850,#自己的
+    #3044248,#zc
 ]
 
 
@@ -71,32 +71,63 @@ class MyHandler(blivedm.BaseHandler):
     #           f" uname={command['data']['uname']}")
     # _CMD_CALLBACK_DICT['INTERACT_WORD'] = __interact_word_callback  # noqa
 
-    # async def _on_heartbeat(self, client: blivedm.BLiveClient, message: blivedm.HeartbeatMessage):
-    #     print(f'[{client.room_id}] 当前人气值：{message.popularity}')
-
-
+    async def _on_heartbeat(self, client: blivedm.BLiveClient, message: blivedm.HeartbeatMessage):
+        print(f'[{client.room_id}] 当前人气值：{message.popularity}')
+    # 普通弹幕
     async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
+        self.SendPack(DGP.MessageType.danmaku, message.uid, message.uname, message.msg)
+        print(f'[{client.room_id}] 用户：{message.uname} 留言：{message.msg}')
+
+    # 礼物消息
+    async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):
         mainpack = DGP.MainPack()
+        mainpack.MessageType = DGP.MessageType.gift
+        mainpack.UserID = message.uid
         mainpack.UserName = message.uname
-        mainpack.UserText = message.msg
-        mainpack.ip = "192.168.1.1"
-        mainpack.id = message.uid
+        mainpack.UserText = '%s %s'%(message.gift_name,message.num)
         msg = mainpack.SerializeToString()
         head = (len(msg)).to_bytes(4, byteorder='little')
         server.send_msg(head)
         server.send_msg(msg)
-        print(f'[{client.room_id}] 用户：{message.uname} 留言：{message.msg}')
+        print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'f' （{message.coin_type}瓜子x{message.total_coin}）')
+
+    # 上舰消息
+    async def _on_buy_guard(self, client: blivedm.BLiveClient, message: blivedm.GuardBuyMessage):
+        mainpack = DGP.MainPack()
+        mainpack.MessageType = DGP.MessageType.guard
+        mainpack.UserID = message.uid
+        mainpack.UserName = message.username
+        mainpack.UserText = message.gift_name
+        msg = mainpack.SerializeToString()
+        head = (len(msg)).to_bytes(4, byteorder='little')
+        server.send_msg(head)
+        server.send_msg(msg)
+        print(f'[{client.room_id}] {message.username} 购买{message.gift_name}')
+    
+    # SuperChat
+    async def _on_super_chat(self, client: blivedm.BLiveClient, message: blivedm.SuperChatMessage):
+        mainpack = DGP.MainPack()
+        mainpack.MessageType = DGP.MessageType.superchat
+        mainpack.UserID = message.uid
+        mainpack.UserName = message.uname
+        mainpack.UserText = message.message
+        msg = mainpack.SerializeToString()
+        head = (len(msg)).to_bytes(4, byteorder='little')
+        server.send_msg(head)
+        server.send_msg(msg)
+        print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
 
 
-    # async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):
-    #     print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'
-    #           f' （{message.coin_type}瓜子x{message.total_coin}）')
-
-    # async def _on_buy_guard(self, client: blivedm.BLiveClient, message: blivedm.GuardBuyMessage):
-    #     print(f'[{client.room_id}] {message.username} 购买{message.gift_name}')
-
-    # async def _on_super_chat(self, client: blivedm.BLiveClient, message: blivedm.SuperChatMessage):
-    #     print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
+    def SendPack(self, type, id, name, message):
+        mainpack = DGP.MainPack()
+        mainpack.MessageType = type
+        mainpack.UserID = id
+        mainpack.UserName = name
+        mainpack.UserText = message
+        msg = mainpack.SerializeToString()
+        head = (len(msg)).to_bytes(4, byteorder='little')
+        server.send_msg(head)
+        server.send_msg(msg)
 
 server = serverTCP()
 if __name__ == '__main__':
