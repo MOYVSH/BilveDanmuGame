@@ -4,6 +4,7 @@ using UnityEngine;
 using Google.Protobuf;
 using System;
 using DanmuGameProtocol;
+using System.Text;
 
 namespace Connection
 {
@@ -36,14 +37,19 @@ namespace Connection
                 return buffer.Length - startIndex;
             }
         }
-
+        string str;
         /// <summary>
         /// 接收到的消息长度
         /// </summary>
         /// <param name="length"></param>
         public void ReadBuffer(int length)
         {
-            if (length < 4) return;
+            if (length < 4)
+            {
+                if (length != 0 && Encoding.UTF8.GetString(buffer, 0, length).Equals("0"))
+                    Debug.LogError("连接成功");
+                return;
+            } 
             startIndex += length;
             if (startIndex <= 4) return;
             //count为包体长度

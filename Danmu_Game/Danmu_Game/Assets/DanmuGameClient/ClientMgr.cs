@@ -13,7 +13,11 @@ public class ClientMgr : MonoBehaviour
     public Button Button_Ping;
     private GaemClient client;
     private Socket socket;
-    // Start is called before the first frame update
+    private bool loadingScene = false;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         Button_Ping.onClick.AddListener(StartClient);
@@ -30,6 +34,7 @@ public class ClientMgr : MonoBehaviour
     }
     private void Update()
     {
+        if (loadingScene) return;
         if (client == null) return;
         if (client.message.msgList.Count <= 0) return;
         
