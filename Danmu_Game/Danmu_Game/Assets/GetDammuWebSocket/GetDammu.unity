@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -403,6 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 875214815}
   - component: {fileID: 875214814}
+  - component: {fileID: 875214816}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -417,18 +418,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875214813}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97df361188ddf24488e8bd36d656e1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonConnect: {fileID: 637999644}
   RoomID: 419850
-  heartbeat_interval: 30
   roodIDReal: 
-  port: 
-  host: 
-  host_server_token: 
 --- !u!4 &875214815
 Transform:
   m_ObjectHideFlags: 0
@@ -443,6 +440,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875214816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875214813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12234c0ba80d1c4f916a1fa971e16ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonConnect: {fileID: 637999644}
+  RoomID: 419850
 --- !u!1 &1506674952
 GameObject:
   m_ObjectHideFlags: 0
