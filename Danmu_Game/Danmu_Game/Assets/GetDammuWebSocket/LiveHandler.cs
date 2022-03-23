@@ -30,11 +30,13 @@ namespace BilibiliUtilities.Test.LiveLib
 
         public async Task GiftMessageHandlerAsync(GiftMessage giftMessage)
         {
-            //如果礼物不是辣条
-            if (giftMessage.GiftId!=1)
-            {
-                Debug.Log($"{giftMessage.Username}送出了{giftMessage.GiftNum}个{giftMessage.GiftName},价值:{giftMessage.TotalCoin}个{giftMessage.CoinType}");
-            }
+            Debug.Log($"{giftMessage.Username}送出了{giftMessage.GiftNum}个{giftMessage.GiftName},价值:{giftMessage.TotalCoin}个{giftMessage.CoinType}");
+
+            ////如果礼物不是辣条
+            //if (giftMessage.GiftId!=1)
+            //{
+            //    Debug.Log($"{giftMessage.Username}送出了{giftMessage.GiftNum}个{giftMessage.GiftName},价值:{giftMessage.TotalCoin}个{giftMessage.CoinType}");
+            //}
         }
 
         public async Task WelcomeMessageHandlerAsync(WelcomeMessage welcomeMessage)

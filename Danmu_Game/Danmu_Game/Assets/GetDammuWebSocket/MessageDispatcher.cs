@@ -103,6 +103,10 @@ namespace BilibiliUtilities.Live.Lib
                         Debug.WriteLine("ROOM_BANNER");
                         Debug.WriteLine(message);
                         break;
+                    case "STOP_LIVE_ROOM_LIST":
+                        UnityEngine.Debug.LogError("STOP_LIVE_ROOM_LIST");
+                        Debug.WriteLine(message);
+                        break;
                     default:
                         Debug.WriteLine("未记录的信息");
                         Debug.WriteLine(message);
