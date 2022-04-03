@@ -302,7 +302,7 @@ public class LiveRoomConnect : IDisposable
                 dataBuffer = new byte[danmuHead.MessageLength()];
                 await roomStream.ReadAsync(dataBuffer, 0, danmuHead.MessageLength());
                 //之后把数据放入到内存流
-                string jsonStr;
+                string jsonStr = "";
                 using (var ms = new MemoryStream(dataBuffer, 2, danmuHead.MessageLength() - 2))
                 {
                     //使用内存流生成解压流(压缩流) 
@@ -329,8 +329,9 @@ public class LiveRoomConnect : IDisposable
                     catch (Exception e)
                     {
                         //读数据超出长度
+                        Debug.LogError(jsonStr);
                         Debug.LogError(e);
-                        throw;
+                        //throw;
                     }
                 }
             }
@@ -345,7 +346,7 @@ public class LiveRoomConnect : IDisposable
             catch (Exception e)
             {
                 Debug.LogError(e);
-                throw e;
+                //throw e;
             }
             if (!"DANMU_MSG".Equals(json["cmd"].ToString()) && !"SEND_GIFT".Equals(json["cmd"].ToString()))
             {
